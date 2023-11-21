@@ -1,9 +1,31 @@
 /** @type {import('tailwindcss').Config} */
+const colors = {
+  primary: {
+    50: '#f2fbf9',
+    100: '#d2f5ee',
+    200: '#a6e9df',
+    300: '#71d7cb',
+    400: '#44bdb3',
+    500: '#2aa29a',
+    600: '#1f827d',
+    700: '#1e6c69',
+    800: '#1b5452',
+    900: '#1b4645',
+    950: '#0a2929',
+  },
+  dark:'#090e34',
+  black:'#090e34',
+  'error': '#B00020',
+}
 module.exports = {
   darkMode: 'class',
   content: ["./src/**/*.{html,ts}"],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
+      colors,
       screens: {
         'sm': '540px',
         'md': '720px',

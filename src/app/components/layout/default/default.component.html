@@ -1,0 +1,17 @@
+<div class="w-full"
+     [ngClass]="{'dark': (themeService.isDarkTheme$ | async)}"
+>
+  <app-default-header></app-default-header>
+  <div class="min-h-screen flex flex-col dark:bg-dark">
+    <div class="flex-grow">
+      <router-outlet></router-outlet>
+    </div>
+    <app-default-footer></app-default-footer>
+
+    <button (click)="scrollTop()" id="scroller" class="hidden items-center justify-center bg-[#4a6cf7] text-white w-10 h-10 rounded-md fixed bottom-8 right-8 left-auto z-[49] hover:shadow-signUp hover:bg-opacity-80 transition duration-300 ease-in-out back-to-top shadow-md hidden">
+      <span class="w-3 h-3 border-t border-l border-white rotate-45 mt-[6px]"></span>
+    </button>
+  </div>
+</div>
+
+
