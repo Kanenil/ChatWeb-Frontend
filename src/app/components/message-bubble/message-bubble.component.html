@@ -1,0 +1,54 @@
+<div *ngIf="message && loggedUser.userName != message.user.userName" class="clear-both" [ngClass]="{'py-2':isNextTheSameUser(), 'pb-6':!isNextTheSameUser()}">
+  <div class="flex items-end gap-3">
+    <div *ngIf="!isNextTheSameUser()">
+      <img *ngIf="!message.user.image" src="./assets/no-image.png" alt="" class="rounded-full h-9 w-9">
+      <img *ngIf="message.user.image" [src]="message.user.image" alt="" class="rounded-full h-9 w-9">
+    </div>
+
+    <div [ngClass]="{'ml-12':isNextTheSameUser()}">
+      <div class="flex gap-2 mb-2">
+        <div class="relative px-5 py-3 max-w-xl text-white rounded-lg rounded-bl-none rounded-br-none bg-violet-500">
+          <p class="mb-0">
+            {{ message.content }}
+          </p>
+          <p class="mt-1 mb-0 text-xs text-right text-white/50 flex items-center justify-end">
+            <svg class="w-2.5 h-2.5 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M10 6v4l3.276 3.276M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+            <span class="align-middle">{{ message.dateCreated | date: 'h:mm' }}</span>
+          </p>
+          <div class="before:content-[''] before:absolute before:border-[5px] before:border-transparent before:border-l-violet-500 before:border-t-violet-500 before:left-0 before:right-0 before:-bottom-2"></div>
+        </div>
+
+      </div>
+      <div *ngIf="!isNextTheSameUser()" class="font-medium text-gray-700 text-14 dark:text-gray-300">{{ message.user.userName }}</div>
+    </div>
+  </div>
+</div>
+<div *ngIf="message && loggedUser.userName == message.user.userName" class="clear-both" [ngClass]="{'py-4':isNextTheSameUser()}">
+  <div class="relative inline-flex items-end mb-6 text-right float-right">
+    <div *ngIf="!isNextTheSameUser()" class="order-3 mr-0 ml-4">
+      <img *ngIf="!loggedUser.image" src="./assets/no-image.png" alt="" class="rounded-full h-9 w-9">
+      <img *ngIf="loggedUser.image" [src]="loggedUser.image" alt="" class="rounded-full h-9 w-9">
+    </div>
+
+    <div [ngClass]="{'mr-12':isNextTheSameUser()}">
+      <div class="flex gap-2 mb-2 justify-end">
+        <div class="relative order-2 max-w-xl px-5 py-3 text-gray-700 rounded-lg rounded-br-none bg-gray-50 dark:bg-zinc-700 dark:text-gray-50">
+          <p class="mb-0">
+            {{ message.content }}
+          </p>
+          <p class="mt-1 mb-0 text-xs text-left text-gray-500 dark:text-gray-300 flex items-center justify-start">
+            <svg class="w-2.5 h-2.5 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M10 6v4l3.276 3.276M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+            <span class="align-middle">{{ message.dateCreated | date: 'h:mm' }}</span>
+          </p>
+          <div class="before:content-[''] before:absolute before:border-[5px] before:border-transparent before:border-r-gray-50 before:border-t-gray-50 before:right-0 before:left-0 before:-bottom-2 dark:before:border-t-zinc-700 dark:before:border-r-zinc-700"></div>
+        </div>
+      </div>
+
+      <div *ngIf="!isNextTheSameUser()" class="font-medium text-gray-700 rtl:text-left text-14 dark:text-gray-300">{{ message.user.userName }}</div>
+    </div>
+  </div>
+</div>

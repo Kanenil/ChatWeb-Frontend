@@ -1,0 +1,8 @@
+import {IUserModel} from "../user/user.model";
+
+export interface IMessageModel {
+  id: number,
+  content: string,
+  dateCreated: string,
+  user: IUserModel
+}

@@ -17,25 +17,24 @@
             <div class="mb-8">
               <label class="block text-sm font-medium mb-3"
                      [ngClass]="{
-                      'label-invalid': submitted && f['email'].errors,
-                      'label-valid': submitted &&  !f['email'].errors,
+                      'label-invalid': submitted && f['username'].errors,
+                      'label-valid': submitted &&  !f['username'].errors,
                       'text-[#1d2144] dark:text-white': !submitted
                      }"
-                     for="email">
-                Your Email
+                     for="username">
+                Your Username or Email
               </label>
-              <input type="text" id="email"
-                     formControlName="email"
-                     placeholder="Enter your Email"
+              <input type="text" id="username"
+                     formControlName="username"
+                     placeholder="Enter your Username or Email"
                      class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
                      [ngClass]="{
-                                'input-invalid': submitted && f['email'].errors,
-                                'input-valid': submitted &&  !f['email'].errors,
+                                'input-invalid': submitted && f['username'].errors,
+                                'input-valid': submitted &&  !f['username'].errors,
                                 'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
                                 }">
-              <p *ngIf="submitted && f['email'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
-                <span *ngIf="f['email'].errors?.['required']">Email is required</span>
-                <span *ngIf="f['email'].errors?.['email']">Email is invalid</span>
+              <p *ngIf="submitted && f['username'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+                <span *ngIf="f['username'].errors?.['required']">Username or Email is required</span>
               </p>
             </div>
             <div class="mb-8">

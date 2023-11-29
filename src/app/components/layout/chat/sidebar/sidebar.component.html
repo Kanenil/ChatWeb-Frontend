@@ -1,0 +1,52 @@
+<div class="sidebar-menu w-full lg:w-[75px] shadow lg:flex lg:flex-col flex flex-row justify-between items-center fixed lg:relative z-40 bottom-0 bg-white dark:bg-zinc-600 ">
+  <div class="hidden lg:my-5 lg:block">
+    <a routerLink="/chat" class="block dark:hidden">
+      <span>
+        <img src="./assets/logo-sm.svg" alt="" class="h-[30px]">
+      </span>
+    </a>
+
+    <a routerLink="/chat" class="hidden dark:block">
+      <span>
+        <img src="./assets/logo-sm.svg" alt="" class="h-[30px]">
+      </span>
+    </a>
+  </div>
+
+  <div class="w-full mx-auto lg:my-auto">
+    <app-sidebar-nav></app-sidebar-nav>
+  </div>
+
+  <div class="w-20 my-5 lg:w-auto">
+    <ul class="lg:block">
+      <app-chat-theme-switcher></app-chat-theme-switcher>
+      <li class="relative lg:mt-4 dropdown lg:dropup">
+        <a id="toggle-profile" class="cursor-pointer" (click)="toggleOpen()">
+          <img *ngIf="profile?.image" [src]="profile?.image" alt="" class="w-10 h-10 p-1 mx-auto rounded-full bg-gray-50 dark:bg-zinc-700">
+          <img *ngIf="!profile?.image" src="./assets/no-image.png" alt="" class="w-10 h-10 p-1 mx-auto rounded-full bg-gray-50 dark:bg-zinc-700">
+        </a>
+
+        <ul appClickedOutside
+            (clickedOutside)="handleClick($event)"
+            style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(0px, -40px);"
+            class="profile-dialog hidden absolute z-40 float-left w-40 py-2 mx-4 mb-12 text-left list-none bg-white border-none rounded-lg shadow-lg dropdown-menu bg-clip-padding dark:bg-zinc-700">
+          <li>
+            <a class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right" href="#">Profile <i class="text-gray-500 rtl:float-left ltr:float-right ri-profile-line text-16"></i></a>
+          </li>
+          <li>
+            <a class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right" href="#">Setting <i class="text-gray-500 rtl:float-left ltr:float-right ri-settings-3-line text-16"></i></a>
+          </li>
+          <li>
+            <a class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right" href="auth-lock-screen.html">Lock Screen <i class="text-gray-500 rtl:float-left ltr:float-right ri-git-repository-private-line text-16"></i></a>
+          </li>
+          <li class="my-2 border-b border-gray-100/20"></li>
+          <li>
+            <button (click)="logout()" class="block text-left w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right">Log out <i class="text-gray-500 rtl:float-left ltr:float-right ri-logout-circle-r-line text-16"></i></button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</div>
+

@@ -13,7 +13,7 @@ import {AuthService} from "../../../../services/auth.service";
 })
 export class LoginComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    email: new FormControl(''),
+    username: new FormControl(''),
     password: new FormControl(''),
   });
   submitted = false;
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group(
       {
-        email: ['', [Validators.required, Validators.email]],
+        username: ['', [Validators.required]],
         password: [
           '',
           [
@@ -85,6 +85,6 @@ export class LoginComponent implements OnInit {
   private saveAndRedirectToHome(resp: IAuthResponseModel) {
     localStorage.setItem("Tokens", JSON.stringify(resp.tokens));
     this.eventBusService.emit(new EventData("Authorize", resp.tokens));
-    this.router.navigate(['/courses'], {replaceUrl: true});
+    this.router.navigate(['/chat'], {replaceUrl: true});
   }
 }

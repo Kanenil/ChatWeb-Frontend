@@ -6,6 +6,9 @@ import {IsSignedInGuard} from "./guards/is-signed-in.guard";
 import {LoginComponent} from "./components/pages/auth/login/login.component";
 import {RegisterComponent} from "./components/pages/auth/register/register.component";
 import {GoogleFinishComponent} from "./components/pages/auth/google-finish/google-finish.component";
+import {ChatComponent} from "./components/layout/chat/chat.component";
+import {AuthGuard} from "./guards/auth.guard";
+import {HomeChatComponent} from "./components/pages/home-chat/home-chat.component";
 
 const routes: Routes = [
   {
@@ -38,6 +41,18 @@ const routes: Routes = [
           },
         ]
       },
+    ]
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: HomeChatComponent,
+        data: {title: 'Chat'}
+      }
     ]
   }
 ];

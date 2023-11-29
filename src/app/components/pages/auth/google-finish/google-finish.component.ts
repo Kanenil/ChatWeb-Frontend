@@ -11,8 +11,7 @@ import {EventData} from "../../../../shared/event.class";
 })
 export class GoogleFinishComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    userName: new FormControl(''),
     image: new FormControl(''),
     token: new FormControl(''),
     terms: new FormControl(false),
@@ -31,8 +30,7 @@ export class GoogleFinishComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.form = this.formBuilder.group(
         {
-          firstName: [params['firstName'], [Validators.required]],
-          lastName: [params['lastName'], [Validators.required]],
+          userName: [params['firstName']+params['lastName'], [Validators.required]],
           image: [params['image']],
           token: [params['token'], Validators.required],
           terms: [false, Validators.requiredTrue]

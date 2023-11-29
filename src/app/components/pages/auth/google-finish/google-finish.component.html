@@ -15,47 +15,24 @@
             <div class="mb-8">
               <label class="block text-sm font-medium mb-3"
                      [ngClass]="{
-                      'label-invalid': submitted && f['firstName'].errors,
-                      'label-valid': submitted &&  !f['firstName'].errors,
+                      'label-invalid': submitted && f['userName'].errors,
+                      'label-valid': submitted &&  !f['userName'].errors,
                       'text-[#1d2144] dark:text-white': !submitted
                      }"
-                     for="firstName">
-                First Name
+                     for="userName">
+                Username
               </label>
-              <input type="text" id="firstName"
-                     formControlName="firstName"
-                     placeholder="Enter your First Name"
+              <input type="text" id="userName"
+                     formControlName="userName"
+                     placeholder="Enter your Username"
                      class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
                      [ngClass]="{
-                                'input-invalid': submitted && f['firstName'].errors,
-                                'input-valid': submitted &&  !f['firstName'].errors,
+                                'input-invalid': submitted && f['userName'].errors,
+                                'input-valid': submitted &&  !f['userName'].errors,
                                 'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
                                 }">
-              <p *ngIf="submitted && f['firstName'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
-                <span *ngIf="f['firstName'].errors?.['required']">First Name is required</span>
-              </p>
-            </div>
-            <div class="mb-8">
-              <label class="block text-sm font-medium mb-3"
-                     [ngClass]="{
-                      'label-invalid': submitted && f['lastName'].errors,
-                      'label-valid': submitted &&  !f['lastName'].errors,
-                      'text-[#1d2144] dark:text-white': !submitted
-                     }"
-                     for="lastName">
-                Last Name
-              </label>
-              <input type="text" id="lastName"
-                     formControlName="lastName"
-                     placeholder="Enter your Last Name"
-                     class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"
-                     [ngClass]="{
-                                'input-invalid': submitted && f['lastName'].errors,
-                                'input-valid': submitted &&  !f['lastName'].errors,
-                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted
-                                }">
-              <p *ngIf="submitted && f['lastName'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
-                <span *ngIf="f['lastName'].errors?.['required']">Last Name is required</span>
+              <p *ngIf="submitted && f['userName'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">
+                <span *ngIf="f['userName'].errors?.['required']">Username is required</span>
               </p>
             </div>
             <div class="flex items-center justify-between mb-8">

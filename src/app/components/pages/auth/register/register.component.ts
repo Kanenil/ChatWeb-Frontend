@@ -14,8 +14,7 @@ import Validation from "../../../../utils/validation";
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    userName: new FormControl(''),
     email: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
@@ -55,8 +54,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group(
       {
-        firstName: ['', [Validators.required]],
-        lastName: ['', [Validators.required]],
+        userName: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
         password: [
           '',

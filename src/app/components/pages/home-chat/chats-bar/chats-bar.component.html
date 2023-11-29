@@ -1,0 +1,30 @@
+<div class="lg:w-[380px] bg-slate-50 shadow overflow-y-hidden mb-[80px] lg:mb-0 dark:bg-zinc-700">
+  <div>
+    <div>
+      <div class="px-6 pt-6">
+        <h4 class="text-2xl font-bold mb-0 text-gray-700 dark:text-gray-50">Chats</h4>
+
+        <div class="py-1 mt-5 mb-5 rounded bg-slate-100 dark:bg-zinc-600 flex">
+            <span class="bg-slate-100 pe-1 ps-3 dark:bg-zinc-600 mt-3">
+              <svg class="w-4 h-4 text-gray-400 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+              </svg>
+            </span>
+          <input type="text" class="border-0 bg-slate-100 text-gray-700 dark:text-gray-50 placeholder:text-[14px] focus:ring-offset-0 focus:outline-none focus:ring-0 dark:bg-zinc-600 placeholder:text-gray-400" placeholder="Search messages or users" aria-label="Search messages or users">
+        </div>
+      </div>
+      <div class="px-6 pb-6">
+        <button
+          (click)="createOwnChatShow()"
+          class="w-full flex items-center justify-center text-base font-medium text-white bg-violet-500 py-4 px-9 hover:shadow-signUp hover:bg-opacity-80 transition duration-300 ease-in-out rounded-md">
+          New chat
+        </button>
+      </div>
+      <div>
+        <ngx-simplebar [options]="options" class="h-[707px]">
+          <app-chat-item *ngFor="let chat of chats" (selected)="selectChat($event)" [chat]="chat"></app-chat-item>
+        </ngx-simplebar>
+      </div>
+    </div>
+  </div>
+</div>

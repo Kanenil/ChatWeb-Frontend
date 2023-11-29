@@ -51,3 +51,20 @@ input::-webkit-inner-spin-button {
 .input-valid {
   @apply border-green-500 text-green-900 placeholder-green-700 focus:ring-green-500 focus:border-green-500
 }
+
+.sidebar-menu {
+  @apply h-screen;
+}
+
+.tab-button {
+  @apply text-[#c0c2cb] hover:bg-[#7269ef1a] hover:text-[#7269ef];
+}
+
+.tab-active {
+  @apply bg-[#7269ef1a] text-[#7269ef];
+}
+
+body.modal-open {
+  height: 100vh;
+  overflow-y: hidden;
+}
