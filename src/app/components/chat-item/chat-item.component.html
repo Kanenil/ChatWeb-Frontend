@@ -2,13 +2,12 @@
   <button class="w-full" (click)="selectChat()">
     <div class="flex">
       <div *ngIf="chat.image" class="relative self-center">
-        <img [src]="chat.image" class="rounded-full w-9 h-9" alt="">
-        <span class="absolute w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full top-7 dark:border-zinc-600"></span>
+        <img [src]="chat.image" class="rounded-lg w-9 h-9" alt="">
       </div>
 
       <div class="flex-grow ml-2 overflow-hidden">
         <h5 class="mb-1 text-base truncate dark:text-gray-50 text-left">{{ chat.name }}</h5>
-        <p *ngIf="chat.lastMessage" class="mb-0 text-left text-gray-500 truncate dark:text-gray-300 text-14">{{chat.lastMessage.user.userName}}: {{chat.lastMessage.content}}</p>
+        <p *ngIf="chat.lastMessage" class="mb-0 text-left text-gray-500 truncate dark:text-gray-300 text-14">{{chat.lastMessage.user.userName}}: {{chat.lastMessage.content | truncate:[15, '...']}}</p>
       </div>
       <div *ngIf="chat.lastMessage" class="text-gray-500 text-[.688rem] dark:text-gray-300">{{chat.lastMessage.dateCreated | customTimeAgo  }}</div>
     </div>

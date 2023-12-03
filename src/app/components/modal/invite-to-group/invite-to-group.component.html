@@ -1,0 +1,91 @@
+<section class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
+  <div class="container">
+    <div class="flex flex-wrap mx-[-16px]">
+      <div class="w-full px-4">
+        <div class="w-[300px] bg-white dark:bg-gray-800 rounded pt-6">
+          <div class="px-5 mb-6 flex justify-between items-center"><p
+            class="text-black opacity-60 dark:text-white text-xl leading-4 tracking-[0.16px] default-outline"
+            id="modal-title" tabindex="0"> Invite to chat </p>
+            <button
+              (click)="goBack()"
+              class="group p-2 border rounded-full border-gray-200 dark:border-white dark:border-opacity-70 focus:outline-none focus:border-indigo-100 focus:bg-indigo-100 hover:bg-indigo-100 hover:border-indigo-100 dark:hover:border-indigo-400 dark:hover:bg-indigo-400 dark:focus:bg-reindigod-400 dark:focus:border-indigo-400 transition-all duration-200 outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                   class="w-5 h-5 text-black opacity-50 dark:text-white dark:opacity-70 group-hover:text-indigo-500 group-hover:opacity-100 dark:group-hover:text-white">
+                <path fill-rule="evenodd"
+                      d="M9.53 2.47a.75.75 0 010 1.06L4.81 8.25H15a6.75 6.75 0 010 13.5h-3a.75.75 0 010-1.5h3a5.25 5.25 0 100-10.5H4.81l4.72 4.72a.75.75 0 11-1.06 1.06l-6-6a.75.75 0 010-1.06l6-6a.75.75 0 011.06 0z"
+                      clip-rule="evenodd"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="">
+            <div class="overflow-x-hidden">
+              <div class="px-5">
+                <div>
+                  <div class="mx-2 mt-3 mb-5">
+                    <div class="relative">
+                      <i class="absolute left-0 top-[5.5px] ml-1 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" aria-hidden="true"
+                             class="w-5 h-5 stroke-2 text-black opacity-40 dark:text-white dark:opacity-70">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+                        </svg>
+                      </i>
+                      <input type="text" placeholder="Search.."
+                             [(ngModel)]="filter"
+                             [ngModelOptions]="{standalone: true}"
+                             class="w-full h-8 py-3 px-7 border outline-none rounded-lg text-black dark:text-white dark:opacity-70 placeholder:text-black placeholder:opacity-40 dark:placeholder:text-white dark:placeholder:opacity-70 focus:outline-none focus:ring focus:ring-indigo-100 duration-200 transition ease-out text-opacity-70 border-none bg-gray-50 dark:bg-gray-700 focus:bg-white dark:focus:bg-gray-800">
+                      <div class="absolute top-0 right-0"></div>
+                    </div>
+                  </div>
+                  <ngx-simplebar class="dark max-h-[200px] mb-5">
+                    <div *ngFor="let user of users | myFilterPipe:{userName: filter}">
+                      <a
+                        class="w-full p-5 flex transition duration-200 ease-out outline-none hover:bg-indigo-50 active:bg-indigo-100 focus:bg-indigo-50 dark:hover:bg-gray-600 dark:focus:bg-gray-600">
+                        <div class="mr-4">
+                          <div class="w-7 h-7 rounded-full bg-cover bg-center"
+                               style="background-image: url({{user.image}});"></div>
+                        </div>
+                        <div class="w-full flex flex-col items-start">
+                          <div class="w-full mb-3 flex justify-between items-center">
+                            <div class="flex items-center">
+                              <p
+                                class="outline-none text-sm text-black opacity-60 dark:text-white dark:opacity-70 font-semibold leading-4 tracking-[0.16px]">
+                                {{ user.userName }}
+                              </p>
+                            </div>
+                            <div class="relative"></div>
+                            <div class="h-full flex flex-col justify-center items-center">
+                              <div class="relative flex justify-center items-center">
+                                <input
+                                  #check
+                                  class="peer h-5 w-5 appearance-none relative cursor-pointer outline-none rounded-[5px] border border-indigo-400 transition-all duration-300"
+                                  [ngClass]="{
+                                      'bg-indigo-400': check.checked,
+                                      'bg-transparent': !check.checked
+                                  }"
+                                  (change)="onCheckboxChange(user, check.checked)"
+                                  type="checkbox">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </ngx-simplebar>
+                  <div class="flex px-5 mt-5 pb-6">
+                    <div class="grow"></div>
+                    <button (click)="onSubmit()"
+                            class="group p-3 flex justify-center items-center rounded-lg transition-all duration-200 ease-out outline-none dark:bg-indigo-400 active:ring active:ring-indigo-200', focus:outline-none focus:ring focus:ring-indigo-100 px-5 bg-indigo-400 hover:bg-indigo-500 active:bg-indigo-500">
+                      <p class="text-sm font-semibold text-white leading-4 tracking-[0.16px]"> Send invites </p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

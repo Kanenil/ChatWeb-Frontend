@@ -5,6 +5,11 @@ import { CreateChatComponent } from './create-chat/create-chat.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
 import { UsersInChatComponent } from './users-in-chat/users-in-chat.component';
+import { MembersInGroupComponent } from './members-in-group/members-in-group.component';
+import {SimplebarAngularModule} from "simplebar-angular";
+import {PipesModule} from "../../pipes/pipes.module";
+import { EditChatComponent } from './edit-chat/edit-chat.component';
+import { InviteToGroupComponent } from './invite-to-group/invite-to-group.component';
 
 
 
@@ -12,16 +17,21 @@ import { UsersInChatComponent } from './users-in-chat/users-in-chat.component';
   declarations: [
     ModalComponent,
     CreateChatComponent,
-    UsersInChatComponent
+    UsersInChatComponent,
+    MembersInGroupComponent,
+    EditChatComponent,
+    InviteToGroupComponent
   ],
   exports: [
     ModalComponent
   ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterLink,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    FormsModule,
+    SimplebarAngularModule,
+    PipesModule
+  ]
 })
 export class ModalModule { }

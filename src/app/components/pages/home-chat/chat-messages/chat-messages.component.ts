@@ -2,7 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
+  OnChanges, OnInit,
   Output,
   SimpleChanges, ViewChild
 } from '@angular/core';
@@ -15,13 +15,16 @@ import {CreateChatComponent} from "../../../modal/create-chat/create-chat.compon
 import {ISentMessageModel} from "../../../../models/message/sent-message.model";
 import {UsersInChatComponent} from "../../../modal/users-in-chat/users-in-chat.component";
 import {SimplebarAngularComponent} from "simplebar-angular";
+import {ChatService} from "../../../../services/chat.service";
+import {environment} from "../../../../../environments/environment";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-chat-messages',
   templateUrl: './chat-messages.component.html'
 })
-export class ChatMessagesComponent implements OnChanges {
-  options = { autoHide: true, scrollbarMinSize: 10 };
+export class ChatMessagesComponent implements OnChanges, OnInit {
+  options = { autoHide: true, scrollbarMinSize: 5 };
   messages : IMessageModel[] = [];
   isOpen = false;
 
@@ -36,14 +39,55 @@ export class ChatMessagesComponent implements OnChanges {
 
   constructor(
     private messageService:MessageService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private chatService: ChatService,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit() {
+    this.chatService.on("ReceiveMessage", (model: any)=>{
+      this.messageService.message(model.messageId).subscribe(resp=>{
+        if(this.messages.filter(x => x.id == model.messageId).length == 0) {
+          if(this.chat && this.chat.id == model.chatId) {
+            let message = resp;
+            if(message.user.image) {
+              message.user.image = environment.imageUrl + message.user.image;
+            }
+            this.messages.push(message);
+            this.scrollBottom();
+          }
+          this.onMessageSend.emit({id: model.chatId, message: resp});
+        }
+      })
+    })
+
+    this.chatService.on("UpdateChat", (model: any)=>{
+      const sel: string | null = this.route.snapshot.queryParamMap.get('sel');
+
+      if(sel == model) {
+        this.messageService.messages(model).subscribe(resp=>{
+          this.messages = resp;
+          for (let i = 0; i < this.messages.length; i++) {
+            if(this.messages[i].user.image) {
+              this.messages[i].user.image = environment.imageUrl + this.messages[i].user.image;
+            }
+          }
+          this.scrollBottom();
+        })
+      }
+    })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['chat'] && this.chat?.id) {
       this.messages = [];
       this.messageService.messages(this.chat.id).subscribe(resp => {
         this.messages = resp;
+        for (let i = 0; i < this.messages.length; i++) {
+          if(this.messages[i].user.image) {
+            this.messages[i].user.image = environment.imageUrl + this.messages[i].user.image;
+          }
+        }
         this.scrollBottom();
       })
     }
@@ -79,9 +123,13 @@ export class ChatMessagesComponent implements OnChanges {
 
   onMessageSendHandler(id: number) {
     this.messageService.message(id).subscribe(resp=>{
-      this.messages.push(resp);
+      let message = resp;
+      if(message.user.image) {
+        message.user.image = environment.imageUrl + message.user.image;
+      }
+      this.messages.push(message);
       this.scrollBottom();
-      this.onMessageSend.emit({id: this.chat.id, message: resp});
+      this.onMessageSend.emit({id: this.chat.id, message: message});
     })
   }
 

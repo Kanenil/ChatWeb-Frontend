@@ -1,4 +1,4 @@
-<div *ngIf="chat" class="overflow-hidden w-[75vw] h-full transition-all duration-150 bg-white user-chat dark:bg-zinc-800">
+<div *ngIf="chat" class="overflow-hidden w-[75vw] h-[100vh] transition-all duration-150 bg-white user-chat dark:bg-zinc-800">
   <div class="flex">
     <div class="relative w-full overflow-hidden">
       <div class="p-4 border-b border-gray-100 lg:p-6 dark:border-zinc-600">
@@ -6,13 +6,11 @@
           <div class="col-span-8 sm:col-span-4">
             <div class="flex items-center">
               <div class="ml-3">
-                <img *ngIf="!chat.image" src="./assets/no-image.png" class="rounded-full w-9 h-9" alt="">
-                <img *ngIf="chat.image" [src]="chat.image" class="rounded-full w-9 h-9" alt="">
+                <img *ngIf="chat.image" [src]="chat.image" class="rounded-lg w-9 h-9" alt="">
               </div>
               <div class="flex-grow overflow-hidden">
                 <h5 class="mb-0 truncate text-16">
                   <a class="text-gray-800 dark:text-gray-50 font-bold ml-2">{{ chat.name }}</a>
-                  <span class="absolute ml-2 mt-2 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full top-7 dark:border-zinc-600"></span>
                 </h5>
               </div>
             </div>
@@ -31,7 +29,7 @@
                       style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 28px);" class="dialog hidden absolute z-50 w-40 py-2 mx-4 mt-2 text-left list-none bg-white border rounded shadow-lg ltr:-right-4 border-gray-50 dropdown-menu top-8 dark:bg-zinc-600 bg-clip-padding dark:border-gray-600/50 rtl:-left-5">
                     <li>
                       <button (click)="showUsersModal()" class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-700 text-left" href="#">
-                        Users
+                        Group Info
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-300 float-right" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 3a3 3 0 1 1-1.614 5.53M15 12a4 4 0 0 1 4 4v1h-3.348M10 4.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0ZM5 11h3a4 4 0 0 1 4 4v2H1v-2a4 4 0 0 1 4-4Z"/>
                         </svg>
@@ -60,7 +58,7 @@
                      (onMessageSend)="onMessageSendHandler($event)">
   </app-message-input>
 </div>
-<div *ngIf="!chat" class="overflow-hidden flex justify-center items-center w-[75vw] h-full transition-all duration-150 bg-white user-chat dark:bg-zinc-800">
+<div *ngIf="!chat" class="overflow-hidden flex justify-center items-center w-[75vw] h-[100vh] transition-all duration-150 bg-white user-chat dark:bg-zinc-800">
   <div class="items-center text-2xl font-bold mb-0 text-gray-400 dark:text-gray-300">
     <div class="flex justify-center items-center">
       <svg class="w-16 h-16" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18" fill="currentColor">

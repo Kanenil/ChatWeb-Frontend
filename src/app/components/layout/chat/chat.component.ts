@@ -11,5 +11,9 @@ export class ChatComponent {
 
   ngOnInit() {
     this.themeService.initTheme()
+
+    this.themeService.isDarkTheme$.subscribe(theme => {
+      theme.valueOf()?document.body.classList.add('dark'):document.body.classList.remove('dark');
+    })
   }
 }

@@ -8,7 +8,6 @@ import {IGoogleRegisterModel} from "../models/auth/google-register.model";
 import {ITokenModel} from "../models/auth/token.model";
 import {environment} from "../../environments/environment";
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -36,5 +35,16 @@ export class AuthService {
 
   refreshToken(model: ITokenModel) {
     return this.http.post<ITokenModel>(`${environment.apiUrl}/auth/refresh-token`, model);
+  }
+
+  async getAccessToken(): Promise<string> {
+    let tokens = JSON.parse(localStorage.getItem("Tokens") || '{}')
+
+    const response = await this.http.post<ITokenModel>(`${environment.apiUrl}/auth/refresh-token`, tokens).toPromise();
+
+    localStorage.setItem("Tokens", JSON.stringify(response))
+
+    // @ts-ignore
+    return response.accessToken;
   }
 }

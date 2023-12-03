@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {ModalService} from "../../services/modal.service";
 
 @Component({
@@ -16,4 +16,10 @@ export class ModalComponent {
   constructor(
     public modalService: ModalService
   ) {}
+
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      this.modalService.close()
+    }
+  }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IProfileModel} from "../../../../models/account/profile.model";
 import {AccountService} from "../../../../services/account.service";
 import {Router} from "@angular/router";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -42,6 +43,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.profile().subscribe(resp=>{
       this.profile = resp;
+      if(this.profile.image) {
+        this.profile.image = environment.imageUrl + this.profile.image;
+      }
     })
   }
 }

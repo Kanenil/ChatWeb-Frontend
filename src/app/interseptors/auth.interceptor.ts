@@ -10,6 +10,7 @@ import {ITokenModel} from "../models/auth/token.model";
 import {EventData} from "../shared/event.class";
 import {EventBusService} from "../shared/event-bus.service";
 import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -68,6 +69,7 @@ export class AuthInterceptor implements HttpInterceptor {
             if (error.status === 401) {
               localStorage.removeItem("Tokens");
               this.eventBusService.emit(new EventData("Authorize", null));
+              location.reload();
             }
 
             return throwError(() => error);
