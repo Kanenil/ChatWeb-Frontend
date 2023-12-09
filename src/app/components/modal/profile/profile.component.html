@@ -1,0 +1,107 @@
+<section class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
+  <div class="container">
+    <div class="flex flex-wrap mx-[-16px]">
+      <div class="w-full px-4">
+        <div *ngIf="loggedUser" class="w-[300px] bg-white dark:bg-gray-800 rounded py-6">
+          <div>
+            <div class="mb-6 px-5 flex justify-between items-center">
+              <p class="text-black opacity-60 dark:text-white text-xl leading-4 tracking-[0.16px] default-outline">
+                <span>Your</span>
+                Profile
+              </p>
+              <button (click)="modalService.close()"
+                      class="group p-3 flex justify-center items-center ease-out group py-2 px-4 border rounded-lg border-gray-200 dark:border-white dark:border-opacity-70 focus:outline-none focus:border-red-100 focus:bg-red-100 hover:bg-red-100 hover:border-red-100 dark:hover:border-red-400 dark:hover:bg-red-400 dark:focus:bg-red-400 dark:focus:border-red-400 transition-all duration-200 outline-none">
+                <p
+                  class="outline-none text-xs font-light text-black opacity-60 dark:text-white dark:opacity-70 leading-4 tracking-[0.16px]">
+                  esc
+                </p>
+              </button>
+            </div>
+            <div class="w-full p-5 pb-6">
+              <div class="flex" [ngClass]="{'hidden':isEditing}">
+                <div class="mr-5">
+                  <button class="outline-none" aria-label="view avatar">
+                    <div class="w-[38px] h-[38px] rounded-full bg-cover bg-center"
+                         style="background-image: url({{loggedUser.image}});"></div>
+                  </button>
+                </div>
+                <div class="w-full flex justify-between">
+                  <div>
+                    <p
+                      class="outline-none text-sm text-black opacity-60 dark:text-white dark:opacity-70 font-semibold leading-4 tracking-[0.16px] mb-3 mr-5 text-start">
+                      <span>{{loggedUser.userName}}</span>
+                    </p>
+                  </div>
+                  <button
+                    (click)="isEditing = true"
+                    class="group flex justify-center items-center outline-none rounded-full focus:outline-none transition-all duration-200 focus:bg-gray-50 hover:bg-gray-50 dark:hover:bg-gray-700 dark:focus:bg-gray-600 group w-7 h-7"
+                    title="edit group">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" aria-hidden="true"
+                         class="w-5 h-5 text-gray-400 group-hover:text-indigo-300">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <form class="flex" enctype="multipart/form-data" (submit)="onSubmit()" [formGroup]="form" *ngIf="isEditing">
+                <div class="mb-5 ml-6">
+                  <div>
+                    <div class="flex flex-col">
+                      <div class="flex justify-start">
+                        <label class="mb-3">
+                          <span
+                            class="w-13 text-black text-opacity-60 dark:text-white dark:text-opacity-70 text-sm font-semibold leading-4 tracking-[0.16px]">
+                            Image
+                          </span>
+                        </label>
+                      </div>
+                      <label [ngClass]="{'hidden':selectedImage}"
+                             class="cursor-pointer w-full h-[100px] border border-dashed rounded-lg p-5 border-gray-200 dark:border-gray-500 flex justify-center items-center hover:bg-opacity-0 active:bg-opacity-0 focus:bg-opacity-0 outline-none focus:outline-none duration-500 transition-all bg-gray-50 dark:bg-opacity-70 dark:bg-gray-700 dark:hover:bg-opacity-0 dark:focus:bg-opacity-0">
+                        <input
+                          type="file" hidden="" (change)="imageSelected($event)" accept="image/*" id="image"
+                          name="image">
+                        <div>
+                          <p
+                            class="outline-none text-sm font-normal leading-4 tracking-[0.16px] text-black text-opacity-40 dark:text-white dark:text-opacity-70">
+                            Choose a file.
+                          </p>
+                        </div>
+                      </label>
+                      <label *ngIf="selectedImage" for="image" class="cursor-pointer flex flex-col items-center justify-center py-3">
+                        <img [src]="selectedImage" class="object-contain w-48">
+                      </label>
+                      <button *ngIf="selectedImage" (click)="removeImage()" type="button"
+                              class="mt-1 group p-3 flex justify-center items-center rounded-lg transition-all duration-200 ease-out outline-none dark:bg-red-400 active:ring active:ring-indigo-200 focus:outline-none focus:ring focus:ring-red-100 px-5 bg-indigo-400 hover:bg-red-500 active:bg-red-500">
+                        <p class="text-sm font-semibold text-white leading-4 tracking-[0.16px]">
+                          Remove image
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex pt-4">
+                    <div class="grow"></div>
+                    <button type="button"
+                            (click)="isEditing = false"
+                            class="group mr-2 p-3 flex justify-center items-center transition-all duration-200 ease-out outline-none border rounded-lg border-gray-200 bg-transparent dark:border-white dark:border-opacity-70 focus:outline-none focus:border-red-100 focus:bg-red-100 hover:bg-red-100 hover:border-red-100 dark:hover:border-red-400 dark:hover:bg-red-400 dark:focus:bg-red-400 dark:focus:border-red-400 px-5 bg-gray-600">
+                      <p class="text-sm font-semibold text-white leading-4 tracking-[0.16px]">
+                        Back
+                      </p>
+                    </button>
+                    <button type="submit"
+                            class="group p-3 flex justify-center items-center rounded-lg transition-all duration-200 ease-out outline-none dark:bg-indigo-400 active:ring active:ring-indigo-200', focus:outline-none focus:ring focus:ring-indigo-100 px-5 bg-indigo-400 hover:bg-indigo-500 active:bg-indigo-500">
+                      <p class="text-sm font-semibold text-white leading-4 tracking-[0.16px]">
+                        Save
+                      </p>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

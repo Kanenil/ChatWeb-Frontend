@@ -10,6 +10,7 @@ import {SimplebarAngularModule} from "simplebar-angular";
 import {PipesModule} from "../../pipes/pipes.module";
 import { EditChatComponent } from './edit-chat/edit-chat.component';
 import { InviteToGroupComponent } from './invite-to-group/invite-to-group.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -20,7 +21,8 @@ import { InviteToGroupComponent } from './invite-to-group/invite-to-group.compon
     UsersInChatComponent,
     MembersInGroupComponent,
     EditChatComponent,
-    InviteToGroupComponent
+    InviteToGroupComponent,
+    ProfileComponent
   ],
   exports: [
     ModalComponent

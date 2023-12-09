@@ -16,6 +16,10 @@ export class AccountService {
     return this.http.get<IProfileModel>(`${environment.apiUrl}/account`);
   }
 
+  edit(model: IProfileModel) {
+    return this.http.post<IProfileModel>(`${environment.apiUrl}/account/edit`, model);
+  }
+
   logout() {
     return this.http.post<any>(`${environment.apiUrl}/account/logout`, {});
   }

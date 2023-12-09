@@ -162,62 +162,6 @@
             </div>
           </div>
         </div>
-
-        <!--        <div-->
-        <!--          class="min-w-[500px] max-w-[700px] mx-auto bg-violet-900 dark:bg-opacity-5 bg-opacity-50 rounded-md p-12 sm:p-[60px]">-->
-        <!--          <h3 class="font-bold text-gray-100 dark:text-white text-2xl sm:text-3xl mb-3 text-center">Create chat</h3>-->
-        <!--          <form enctype="multipart/form-data" [formGroup]="form" (submit)="onSubmit()">-->
-        <!--            <div class="mb-8">-->
-        <!--              <label class="block text-sm font-medium mb-3"-->
-        <!--                     [ngClass]="{-->
-        <!--                      'label-invalid': submitted && f['name'].errors,-->
-        <!--                      'label-valid': submitted &&  !f['name'].errors,-->
-        <!--                      'text-gray-100 dark:text-white': !submitted-->
-        <!--                     }"-->
-        <!--                     for="name">-->
-        <!--                Chat Name-->
-        <!--              </label>-->
-        <!--              <input type="text" id="name"-->
-        <!--                     formControlName="name"-->
-        <!--                     placeholder="Enter Chat Name"-->
-        <!--                     class="w-full dark:bg-[#242B51] border border-transparent rounded-md shadow-one py-3 px-6 text-base outline-none focus-visible:shadow-none"-->
-        <!--                     [ngClass]="{-->
-        <!--                                'input-invalid': submitted && f['name'].errors,-->
-        <!--                                'input-valid': submitted &&  !f['name'].errors,-->
-        <!--                                'text-[#959cb1] placeholder-[#959cb1] focus:border-[#4a6cf7]': !submitted-->
-        <!--                                }">-->
-        <!--              <p *ngIf="submitted && f['name'].errors" class="mt-2 text-sm text-red-600 dark:text-red-500">-->
-        <!--                <span *ngIf="f['name'].errors?.['required']">Chat Name is required</span>-->
-        <!--              </p>-->
-        <!--            </div>-->
-        <!--            <div class="flex items-center justify-center w-full mb-4">-->
-        <!--              <label for="image"-->
-        <!--                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">-->
-        <!--                <div *ngIf="!selectedImage" class="flex flex-col items-center justify-center pt-5 pb-6">-->
-        <!--                  <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"-->
-        <!--                       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">-->
-        <!--                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-        <!--                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>-->
-        <!--                  </svg>-->
-        <!--                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span-->
-        <!--                    class="font-semibold">Click to upload</span> or drag and drop</p>-->
-        <!--                  <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>-->
-        <!--                </div>-->
-        <!--                <div *ngIf="selectedImage" class="flex flex-col items-center justify-center pt-5 pb-6">-->
-        <!--                  <img [src]="selectedImage" class="object-contain w-48">-->
-        <!--                </div>-->
-        <!--                <input (change)="imageSelected($event)" accept="image/*" id="image" name="image" type="file"-->
-        <!--                       class="hidden"/>-->
-        <!--              </label>-->
-        <!--            </div>-->
-        <!--            <div class="mb-6">-->
-        <!--              <button-->
-        <!--                class="w-full flex items-center justify-center text-base font-medium text-white bg-violet-500 py-4 px-9 hover:shadow-signUp hover:bg-opacity-80 transition duration-300 ease-in-out rounded-md">-->
-        <!--                Create-->
-        <!--              </button>-->
-        <!--            </div>-->
-        <!--          </form>-->
-        <!--        </div>-->
       </div>
     </div>
   </div>

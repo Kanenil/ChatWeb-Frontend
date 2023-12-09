@@ -4,7 +4,16 @@ import {ThemeService} from "../../../services/theme.service";
 
 @Component({
   selector: 'app-chat-layout',
-  templateUrl: './chat.component.html'
+  template: `
+    <div class="flex w-screen bg-white dark:bg-zinc-800">
+      <app-chat-sidebar></app-chat-sidebar>
+      <router-outlet></router-outlet>
+
+      <app-modal *ngIf="modalService.isVisible$ | async">
+        <ng-container *ngComponentOutlet="modalService.selectedComponent$ | async"></ng-container>
+      </app-modal>
+    </div>
+  `
 })
 export class ChatComponent {
  constructor(public modalService: ModalService, public themeService: ThemeService) {}

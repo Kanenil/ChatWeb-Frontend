@@ -3,6 +3,8 @@ import {IProfileModel} from "../../../../models/account/profile.model";
 import {AccountService} from "../../../../services/account.service";
 import {Router} from "@angular/router";
 import {environment} from "../../../../../environments/environment";
+import {ModalService} from "../../../../services/modal.service";
+import {ProfileComponent} from "../../../modal/profile/profile.component";
 
 @Component({
   selector: 'app-chat-sidebar',
@@ -12,8 +14,11 @@ export class SidebarComponent implements OnInit {
   public isOpen = false;
   public profile: IProfileModel | null = null;
 
-  constructor(private accountService: AccountService, private router: Router) {
-  }
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private modalService: ModalService
+  ) {}
 
   logout() {
     this.accountService.logout().subscribe(resp => {
@@ -47,5 +52,9 @@ export class SidebarComponent implements OnInit {
         this.profile.image = environment.imageUrl + this.profile.image;
       }
     })
+  }
+
+  showProfile() {
+    this.modalService.show(ProfileComponent);
   }
 }

@@ -4,7 +4,7 @@
       <div class="p-4 border-b border-gray-100 lg:p-6 dark:border-zinc-600">
         <div class="grid items-center grid-cols-12">
           <div class="col-span-8 sm:col-span-4">
-            <div class="flex items-center">
+            <div (click)="showUsersModal()" class="flex items-center cursor-pointer">
               <div class="ml-3">
                 <img *ngIf="chat.image" [src]="chat.image" class="rounded-lg w-9 h-9" alt="">
               </div>

@@ -31,17 +31,19 @@
             style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate(0px, -40px);"
             class="profile-dialog hidden absolute z-40 float-left w-40 py-2 mx-4 mb-12 text-left list-none bg-white border-none rounded-lg shadow-lg dropdown-menu bg-clip-padding dark:bg-zinc-700">
           <li>
-            <a class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right" href="#">Profile <i class="text-gray-500 rtl:float-left ltr:float-right ri-profile-line text-16"></i></a>
-          </li>
-          <li>
-            <a class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right" href="#">Setting <i class="text-gray-500 rtl:float-left ltr:float-right ri-settings-3-line text-16"></i></a>
-          </li>
-          <li>
-            <a class="block w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right" href="auth-lock-screen.html">Lock Screen <i class="text-gray-500 rtl:float-left ltr:float-right ri-git-repository-private-line text-16"></i></a>
+            <button (click)="showProfile()" class="block text-left w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right">Profile
+              <svg class="w-4 h-4 text-gray-500 float-right mt-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 11 14H9a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 10 19Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+              </svg>
+            </button>
           </li>
           <li class="my-2 border-b border-gray-100/20"></li>
           <li>
-            <button (click)="logout()" class="block text-left w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right">Log out <i class="text-gray-500 rtl:float-left ltr:float-right ri-logout-circle-r-line text-16"></i></button>
+            <button (click)="logout()" class="block text-left w-full px-4 py-2 text-sm font-normal text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100/30 dark:text-gray-100 dark:hover:bg-zinc-600/50 ltr:text-left rtl:text-right">Log out
+              <svg class="w-4 h-4 text-gray-500 float-right mt-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg>
+            </button>
           </li>
         </ul>
       </li>

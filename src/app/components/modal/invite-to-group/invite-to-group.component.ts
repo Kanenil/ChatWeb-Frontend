@@ -39,6 +39,11 @@ export class InviteToGroupComponent implements OnInit {
         }
         this.userService.users().subscribe(resp=>{
           this.users = resp.filter(item1 => !this.chat.users?.some(item2 => item1.userName === item2.userName))
+
+          for (let i = 0; i < this.users.length; i++) {
+            if(this.users[i].image)
+              this.users[i].image = environment.imageUrl + this.users[i].image;
+          }
         });
       });
     }

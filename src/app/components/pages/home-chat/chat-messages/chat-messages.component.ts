@@ -96,7 +96,7 @@ export class ChatMessagesComponent implements OnChanges, OnInit {
   private scrollBottom() {
     setTimeout(() => {
       this.scrollable.SimpleBar.getScrollElement().scrollTop = this.scrollable.SimpleBar.getScrollElement().scrollHeight;
-    }, 0);
+    }, 300);
   }
 
   toggleOpen() {

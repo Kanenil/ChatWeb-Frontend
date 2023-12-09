@@ -8,14 +8,61 @@
     <div [ngClass]="{'ml-12':isNextTheSameUser()}">
       <div class="flex gap-2 mb-2">
         <div class="relative px-5 py-3 max-w-xl text-white rounded-lg rounded-bl-none rounded-br-none bg-violet-500">
-          <p class="mb-0">
+          <div *ngIf="fileDetail && !fileDetail.isImage" class="p-2 mb-2 bg-white rounded dark:bg-zinc-800">
+            <div class="flex flex-wrap items-center gap-2 attached-file">
+              <div class="flex items-center justify-center w-12 h-12 rounded bg-violet-500/20 text-violet-500">
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+                  <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Z"/>
+                </svg>
+              </div>
+              <div class="overflow-hidden flex-grow-1">
+                <div class="text-start">
+                  <h5 class="mb-1 truncate text-14 text-black dark:text-gray-50 font-semibold">{{message.fileName}}</h5>
+                  <p class="mb-0 text-gray-500 truncate text-13 dark:text-gray-500">{{fileDetail.size| fileSize}}</p>
+                </div>
+              </div>
+              <div class="ml-4">
+                <div class="flex items-start gap-2">
+                  <div>
+                    <a [download]="message.fileName" [href]="fileDetail.path" class="font-medium ">
+                      <svg class="w-[17px] h-[17px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="fileDetail && fileDetail.isImage" class="relative mb-0">
+            <div class="relative inline-block mr-2">
+              <div>
+                <a class="inline-block m-1 min-w-[150px]" [title]="message.fileName">
+                  <img [src]="fileDetail.path" alt="" class="border rounded h-72">
+                </a>
+              </div>
+              <div class="absolute right-[10px] left-auto bottom-[10px]">
+                <ul>
+                  <li class="inline-block p-2">
+                    <a [download]="message.fileName" [href]="fileDetail.path" class="font-medium">
+                      <svg class="w-[17px] h-[17px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <p class="mb-0 break-words">
             {{ message.content }}
           </p>
           <p class="mt-1 mb-0 text-xs text-right text-white/50 flex items-center justify-end">
             <svg class="w-2.5 h-2.5 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M10 6v4l3.276 3.276M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
             </svg>
-            <span class="align-middle">{{ message.dateCreated | date: 'h:mm' }}</span>
+            <span class="align-middle">{{ message.dateCreated | customTimeAgo }}</span>
           </p>
           <div class="before:content-[''] before:absolute before:border-[5px] before:border-transparent before:border-l-violet-500 before:border-t-violet-500 before:left-0 before:right-0 before:-bottom-2"></div>
         </div>
@@ -35,6 +82,53 @@
     <div [ngClass]="{'mr-12':isNextTheSameUser()}">
       <div class="flex gap-2 mb-2 justify-end">
         <div class="relative order-2 max-w-xl px-5 py-3 text-gray-700 rounded-lg rounded-br-none bg-gray-50 dark:bg-zinc-700 dark:text-gray-50">
+          <div *ngIf="fileDetail && !fileDetail.isImage" class="p-2 mb-2 bg-white rounded dark:bg-zinc-800">
+            <div class="flex flex-wrap items-center gap-2 attached-file">
+              <div class="flex items-center justify-center w-12 h-12 rounded bg-violet-500/20 text-violet-500">
+                <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+                  <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Z"/>
+                </svg>
+              </div>
+              <div class="overflow-hidden flex-grow-1">
+                <div class="text-start">
+                  <h5 class="mb-1 truncate text-14 dark:text-gray-50 font-semibold">{{message.fileName}}</h5>
+                  <p class="mb-0 text-gray-500 truncate text-13 dark:text-gray-500">{{fileDetail.size| fileSize}}</p>
+                </div>
+              </div>
+              <div class="ml-4">
+                <div class="flex items-start gap-2">
+                  <div>
+                    <a [download]="message.fileName" [href]="fileDetail.path" class="font-medium ">
+                      <svg class="w-[17px] h-[17px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="fileDetail && fileDetail.isImage" class="relative mb-0">
+            <div class="relative inline-block mr-2">
+              <div>
+                <a class="inline-block m-1 min-w-[150px]" [title]="message.fileName">
+                  <img [src]="fileDetail.path" alt="" class="border rounded h-72">
+                </a>
+              </div>
+              <div class="absolute right-[10px] left-auto bottom-[10px]">
+                <ul>
+                  <li class="inline-block p-2">
+                    <a [download]="message.fileName" [href]="fileDetail.path" class="font-medium">
+                      <svg class="w-[17px] h-[17px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <p class="mb-0 break-words">
             {{ message.content }}
           </p>
@@ -42,7 +136,7 @@
             <svg class="w-2.5 h-2.5 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
               <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M10 6v4l3.276 3.276M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
             </svg>
-            <span class="align-middle">{{ message.dateCreated | date: 'h:mm' }}</span>
+            <span class="align-middle">{{ message.dateCreated | customTimeAgo }}</span>
           </p>
           <div class="before:content-[''] before:absolute before:border-[5px] before:border-transparent before:border-r-gray-50 before:border-t-gray-50 before:right-0 before:left-0 before:-bottom-2 dark:before:border-t-zinc-700 dark:before:border-r-zinc-700"></div>
         </div>
