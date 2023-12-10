@@ -1,7 +1,7 @@
 <div appClickedOutside
      (clickedOutside)="handleClick($event)"
      id="chats-bar"
-     class="absolute z-50 lg:relative min-w-[380px] bg-slate-50 shadow overflow-y-hidden dark:bg-zinc-700 h-[100vh] lg:block transform animate-opacity" [ngClass]="{'hidden':!isOpened}">
+     class="absolute z-50 lg:z-0 lg:relative min-w-[380px] bg-slate-50 shadow overflow-y-hidden dark:bg-zinc-700 h-[100vh] lg:block transform animate-opacity" [ngClass]="{'hidden':!isOpened}">
   <div>
     <div>
       <div class="w-full min-h-[80px] max-h-fit px-5 pt-6 flex justify-between items-center">

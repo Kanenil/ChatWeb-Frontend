@@ -37,7 +37,7 @@ export class CustomTimeAgoPipe implements PipeTransform, OnDestroy {
     } else if (diffInMinutes < 2880) {
       return 'yesterday';
     } else {
-      return <string>this.datePipe.transform(inputDate, 'medium');
+      return <string>this.datePipe.transform(inputDate, 'MMM d');
     }
   }
 }
