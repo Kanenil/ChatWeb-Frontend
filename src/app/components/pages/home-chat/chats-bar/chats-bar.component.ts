@@ -7,6 +7,8 @@ import {Observable, Subscription} from "rxjs";
 import {ISentMessageModel} from "../../../../models/message/sent-message.model";
 import {environment} from "../../../../../environments/environment";
 import {EventBusService} from "../../../../shared/event-bus.service";
+import {EventData} from "../../../../shared/event.class";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-chats-bar',
@@ -17,6 +19,8 @@ export class ChatsBarComponent implements OnInit, OnDestroy {
   options = { autoHide: true, scrollbarMinSize: 100 };
   // @ts-ignore
   private eventsSubscription: Subscription;
+  isOpened: boolean = false;
+
 
   @Output() chatChanged = new EventEmitter<number>();
   // @ts-ignore
@@ -25,7 +29,8 @@ export class ChatsBarComponent implements OnInit, OnDestroy {
   constructor(
     private chatService: ChatService,
     private modalService: ModalService,
-    private eventBusService: EventBusService
+    private eventBusService: EventBusService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +44,17 @@ export class ChatsBarComponent implements OnInit, OnDestroy {
       this.sortByLastMessage();
     });
 
+    this.eventBusService.on("ExitChat", (chatId:number)=>{
+      this.chatChanged.emit(-1);
+      let index = this.chats.findIndex(val => val.id == chatId);
+      this.chats.splice(index, 1);
+      this.sortByLastMessage();
+    })
+
+    this.eventBusService.on("Chats", (opened:boolean)=>{
+      this.isOpened = opened;
+    })
+
     this.eventBusService.on("ChatCreate", (id:number)=>{
       this.chatService.chat(id).subscribe(resp => {
         this.selectChat(resp.id);
@@ -51,13 +67,7 @@ export class ChatsBarComponent implements OnInit, OnDestroy {
     })
 
     this.chatService.on("AddedToChat", (model:any)=>{
-      this.chatService.chat(model).subscribe(resp=>{
-        if(resp.image) {
-          resp.image = environment.imageUrl + resp.image
-        }
-        this.chats.push(resp);
-        this.sortByLastMessage();
-      })
+      this.loadChat(model);
     })
 
     this.chatService.on("UpdateChat", (model:any)=>{
@@ -83,6 +93,19 @@ export class ChatsBarComponent implements OnInit, OnDestroy {
     });
   }
 
+  private loadChat(id: number) {
+    this.chatService.chat(id).subscribe(resp=>{
+      if(!resp)
+        this.loadChat(id);
+
+      if(resp.image) {
+        resp.image = environment.imageUrl + resp.image
+      }
+      this.chats.push(resp);
+      this.sortByLastMessage();
+    })
+  }
+
   private sortByLastMessage() {
     this.chats.sort((a,b)=> !a.lastMessage? 1: a.lastMessage?.dateCreated < b.lastMessage?.dateCreated?1:-1);
   }
@@ -92,10 +115,23 @@ export class ChatsBarComponent implements OnInit, OnDestroy {
   }
 
   selectChat(value: number) {
-    this.chatChanged.emit(value);
+    const sel: string | null = this.route.snapshot.queryParamMap.get('sel');
+
+    // @ts-ignore
+    if(sel == null || (sel && sel != value)) {
+      this.chatChanged.emit(value);
+    }
+
+    this.eventBusService.emit(new EventData("Chats", false));
   }
 
   createOwnChatShow() {
     this.modalService.show(CreateChatComponent);
+  }
+
+  handleClick(el: Element) {
+    if(!el.closest('#chats-bar-btn') && !el.closest('#chats-bar') && this.isOpened && !el.closest("#modal-dialog")) {
+      this.eventBusService.emit(new EventData("Chats", false));
+    }
   }
 }

@@ -1,4 +1,4 @@
-<section class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
+<section id="modal-dialog" class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
   <div class="container">
     <div class="flex flex-wrap mx-[-16px]">
       <div class="w-full px-4">
@@ -62,7 +62,7 @@
                           </span>
                         </label>
                       </div>
-                      <label tabindex="0"
+                      <label [ngClass]="{'hidden':selectedImage}"
                              class="cursor-pointer w-full h-[100px] border border-dashed rounded-lg p-5 border-gray-200 dark:border-gray-500 flex justify-center items-center hover:bg-opacity-0 active:bg-opacity-0 focus:bg-opacity-0 outline-none focus:outline-none duration-500 transition-all bg-gray-50 dark:bg-opacity-70 dark:bg-gray-700 dark:hover:bg-opacity-0 dark:focus:bg-opacity-0">
                         <input
                           type="file" hidden="" (change)="imageSelected($event)" accept="image/*" id="image"
@@ -73,9 +73,9 @@
                             Choose a file.
                           </p>
                         </div>
-                        <div *ngIf="selectedImage" class="flex flex-col items-center justify-center pt-5 pb-6">
-                          <img [src]="selectedImage" class="object-contain w-48">
-                        </div>
+                      </label>
+                      <label *ngIf="selectedImage" for="image" class="cursor-pointer flex flex-col items-center justify-center py-3">
+                        <img [src]="selectedImage" class="object-contain w-48">
                       </label>
                       <button *ngIf="selectedImage" (click)="removeImage()" type="button"
                               class="mt-1 group p-3 flex justify-center items-center rounded-lg transition-all duration-200 ease-out outline-none dark:bg-red-400 active:ring active:ring-indigo-200 focus:outline-none focus:ring focus:ring-red-100 px-5 bg-indigo-400 hover:bg-red-500 active:bg-red-500">

@@ -7,14 +7,18 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Subject} from "rxjs";
 import {ISentMessageModel} from "../../../models/message/sent-message.model";
 import {environment} from "../../../../environments/environment";
+import {EventBusService} from "../../../shared/event-bus.service";
 
 @Component({
   selector: 'app-home-chat',
   template: `
-    <div class="flex w-[75wv]">
+    <div class="flex overflow-hidden">
       <app-chats-bar [messageSent]="messageSent" (chatChanged)="chatSelected($event)"></app-chats-bar>
-      <app-chat-messages [loggedUser]="loggedUser" [chat]="chat" (onMessageSend)="onMessageSendHandler($event)"></app-chat-messages>
+      <div class="flex-1">
+        <app-chat-messages [loggedUser]="loggedUser" [chat]="chat" (onMessageSend)="onMessageSendHandler($event)"></app-chat-messages>
+      </div>
     </div>
+
   `
 })
 export class HomeChatComponent implements OnInit, OnDestroy {
@@ -28,7 +32,8 @@ export class HomeChatComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private chatService: ChatService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private eventBusService: EventBusService
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +47,15 @@ export class HomeChatComponent implements OnInit, OnDestroy {
     })
 
     this.chatService.on("UpdateChat", (model: any)=>{
-      this.chatById(model);
+      const sel: string | null = this.route.snapshot.queryParamMap.get('sel');
+
+      if(sel && sel == model) {
+        this.chatById(model);
+      }
+    })
+
+    this.eventBusService.on("ChatCreate", (id:number)=>{
+      setTimeout(()=>this.chatById(id), 100);
     })
 
     const sel: string | null = this.route.snapshot.queryParamMap.get('sel');
@@ -57,6 +70,12 @@ export class HomeChatComponent implements OnInit, OnDestroy {
   }
 
   chatSelected(chat: number) {
+    if(chat == -1) {
+      // @ts-ignore
+      this.chat = null;
+      return;
+    }
+
     this.chatById(chat);
   }
 

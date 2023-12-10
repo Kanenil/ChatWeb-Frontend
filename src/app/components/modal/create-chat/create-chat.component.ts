@@ -78,6 +78,10 @@ export class CreateChatComponent implements OnInit {
 
     this.chatService.create(this.form.value).subscribe(
       resp => {
+        this.modalService.close();
+        this.eventBusService.emit(new EventData("ChatCreate", resp.id));
+        this.router.navigate(['.'], {queryParams:{sel: resp?.id}, onSameUrlNavigation: "reload"});
+
         this.chatService.chat(resp?.id).subscribe(chat=>{
           if(this.selectedUsers.length > 0) {
             for (const user of this.selectedUsers) {
@@ -85,9 +89,6 @@ export class CreateChatComponent implements OnInit {
               this.chatService.inviteToChatSignal(chat.id, user.id).then();
             }
           }
-          this.modalService.close();
-          this.eventBusService.emit(new EventData("ChatCreate", chat.id));
-          this.router.navigate(['.'], {queryParams:{sel: resp?.id}, onSameUrlNavigation: "reload"});
         })
       }
     );

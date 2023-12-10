@@ -40,6 +40,10 @@ export class ChatService {
     return this.http.post<any>(`${environment.apiUrl}/chats/${chatId}/add/${userId}`, []);
   }
 
+  exitFromChat(chatId:number) {
+    return this.http.delete<any>(`${environment.apiUrl}/chats/leave/${chatId}`);
+  }
+
   private subject$ = new Subject<EventData>();
 
   on(eventName: string, action: any): Subscription {
@@ -91,6 +95,11 @@ export class ChatService {
   updateChat(chatId:number) {
     // @ts-ignore
     return this.chatConnection.send("UpdateChat", chatId);
+  }
+
+  exitFromChatSignal(chatId:number) {
+    // @ts-ignore
+    return this.chatConnection.send("LeaveFromChat", chatId);
   }
 
   stopChatConnection() {

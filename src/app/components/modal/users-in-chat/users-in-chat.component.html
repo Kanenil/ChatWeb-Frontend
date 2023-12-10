@@ -1,4 +1,4 @@
-<section class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
+<section id="modal-dialog" class="fixed z-50 top-16 left-1/2 -translate-x-1/2 overflow-hidden pb-[120px]">
   <div class="container">
     <div class="flex flex-wrap mx-[-16px]">
       <div class="w-full px-4">
@@ -87,7 +87,8 @@
             </div>
             <div class="w-full border-t border-gray-100 dark:border-gray-700">
               <div class="px-5 pt-5 flex items-center group">
-                <button class="group w-full flex items-center outline-none">
+                <button (click)="leaveConfirmation = true" class="group w-full flex items-center outline-none"
+                        [ngClass]="{'hidden': leaveConfirmation}">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                        stroke="currentColor" aria-hidden="true"
                        class="w-[20px] h-[20px] mr-6 transition-all duration-200 text-red-400 group-hover:text-red-500">
@@ -98,6 +99,22 @@
                     <p
                       class="outline-none text-sm font-normal leading-4 tracking-[0.16px] transition-all duration-200 text-red-400 group-hover:text-red-500">
                       exit group</p>
+                  </div>
+                </button>
+                <button (click)="leaveConfirmation = false" class="w-full flex items-center outline-none"
+                        [ngClass]="{'hidden': !leaveConfirmation}">
+                  <div class="grow flex justify-start items-start">
+                    <p
+                      class="outline-none text-sm font-normal leading-4 tracking-[0.16px] transition-all duration-200 text-gray-400 hover:text-gray-500">
+                      No, cancel</p>
+                  </div>
+                </button>
+                <button (click)="leaveFromChat()" class="w-full flex items-center outline-none"
+                        [ngClass]="{'hidden': !leaveConfirmation}">
+                  <div class="grow flex justify-start items-start">
+                    <p
+                      class="outline-none text-sm font-normal leading-4 tracking-[0.16px] transition-all duration-200 text-red-400 hover:text-red-500">
+                      Yes, leave</p>
                   </div>
                 </button>
               </div>

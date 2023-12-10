@@ -1,9 +1,9 @@
-<div *ngIf="chat" class="overflow-hidden w-[75vw] h-[100vh] transition-all duration-150 bg-white user-chat dark:bg-zinc-800">
-  <div class="flex">
+<div *ngIf="chat" class="overflow-hidden h-screen flex flex-col transition-all duration-150 bg-white dark:bg-zinc-800">
+  <div class="flex-shrink h-full">
     <div class="relative w-full overflow-hidden">
       <div class="p-4 border-b border-gray-100 lg:p-6 dark:border-zinc-600">
         <div class="grid items-center grid-cols-12">
-          <div class="col-span-8 sm:col-span-4">
+          <div class="col-span-4">
             <div (click)="showUsersModal()" class="flex items-center cursor-pointer">
               <div class="ml-3">
                 <img *ngIf="chat.image" [src]="chat.image" class="rounded-lg w-9 h-9" alt="">
@@ -15,8 +15,8 @@
               </div>
             </div>
           </div>
-          <div class="col-span-4 sm:col-span-8">
-            <ul class="flex items-center justify-end lg:gap-4">
+          <div class="col-span-8">
+            <ul class="flex items-center justify-end gap-4">
               <li class="px-3">
                 <div class="relative dropdown">
                   <button id="toggle" (click)="toggleOpen()" class="p-0 text-xl text-gray-500 border-0 btn dropdown-toggle dark:text-gray-300" type="button">
@@ -42,9 +42,8 @@
           </div>
         </div>
       </div>
-
-      <div class="h-[80vh] p-4 lg:p-6">
-        <ngx-simplebar #scrollable class="h-[700px]" [options]="options">
+      <div class="p-4 lg:p-6">
+        <ngx-simplebar #scrollable class="h-[78vh]" [options]="options">
           <app-message-bubble *ngFor="let message of messages; index as i;"
                               [loggedUser]="loggedUser"
                               [message]="message"
@@ -58,7 +57,7 @@
                      (onMessageSend)="onMessageSendHandler($event)">
   </app-message-input>
 </div>
-<div *ngIf="!chat" class="overflow-hidden flex justify-center items-center w-[75vw] h-[100vh] transition-all duration-150 bg-white user-chat dark:bg-zinc-800">
+<div *ngIf="!chat" class="flex justify-center items-center mx-auto h-screen transition-all duration-150 bg-white user-chat dark:bg-zinc-800">
   <div class="items-center text-2xl font-bold mb-0 text-gray-400 dark:text-gray-300">
     <div class="flex justify-center items-center">
       <svg class="w-16 h-16" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18" fill="currentColor">

@@ -1,5 +1,4 @@
-
-<div *ngIf="file" class="absolute ml-1 group max-w-[500px] p-2 rounded-b transition duration-500 rounded-tr bg-gray-50 dark:bg-gray-600"
+<div *ngIf="file" class="absolute flex flex-1 ml-1 group w-fit p-2 rounded-b transition duration-500 rounded-tr bg-gray-50 dark:bg-gray-600"
     [ngClass]="{'-mt-44':selectedImage, '-mt-24':!selectedImage}"
 >
   <div *ngIf="selectedImage" class="rounded bg-cover bg-center md:w-[170px] md:h-[160px] xs:w-[160px] xs:h-[155px]"
@@ -38,7 +37,7 @@
   </div>
 </div>
 
-<div class="z-40 w-full p-6 mb-0 bg-white border-t lg:mb-1 border-gray-50 dark:bg-zinc-800 dark:border-zinc-700">
+<div class="z-40 w-full p-6 bg-white border-t mb-1 border-gray-50 dark:bg-zinc-800 dark:border-zinc-700">
   <div class="h-auto flex items-end">
     <div class="min-h-[44px]">
       <input
@@ -58,7 +57,7 @@
         </svg>
       </label>
     </div>
-    <div class="grow md:mr-5 xs:mr-4 self-end">
+    <div class="grow mr-5 self-end">
       <div class="relative">
         <textarea
           [(ngModel)]="input" (keyup.enter)="onEnterKey($event)"

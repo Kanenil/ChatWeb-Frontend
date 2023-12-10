@@ -5,9 +5,11 @@ import {ThemeService} from "../../../services/theme.service";
 @Component({
   selector: 'app-chat-layout',
   template: `
-    <div class="flex w-screen bg-white dark:bg-zinc-800">
+    <div class="flex bg-white dark:bg-zinc-800">
       <app-chat-sidebar></app-chat-sidebar>
-      <router-outlet></router-outlet>
+      <div class="h-screen w-full">
+        <router-outlet></router-outlet>
+      </div>
 
       <app-modal *ngIf="modalService.isVisible$ | async">
         <ng-container *ngComponentOutlet="modalService.selectedComponent$ | async"></ng-container>
