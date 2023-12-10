@@ -1,6 +1,7 @@
 import {OnDestroy, Pipe, PipeTransform} from '@angular/core';
 import {DatePipe} from "@angular/common";
 import {interval, Subject, switchMap, takeUntil, timer} from "rxjs";
+import * as moment from 'moment-timezone';
 
 @Pipe({
   name: 'customTimeAgo',
@@ -24,10 +25,11 @@ export class CustomTimeAgoPipe implements PipeTransform, OnDestroy {
   }
 
   transform(value: string | Date): string {
-    const now = new Date();
-    const inputDate = new Date(value);
+    const now = moment.utc();
+    const inputDate = moment.utc(value);
+    inputDate.add(6, 'hours');
 
-    const diffInMinutes = Math.floor((now.getTime() - inputDate.getTime()) / (1000 * 60));
+    const diffInMinutes = now.diff(inputDate, 'minutes');
 
     if (diffInMinutes < 60) {
       return `${diffInMinutes} min ago`;
@@ -37,7 +39,7 @@ export class CustomTimeAgoPipe implements PipeTransform, OnDestroy {
     } else if (diffInMinutes < 2880) {
       return 'yesterday';
     } else {
-      return <string>this.datePipe.transform(inputDate, 'MMM d');
+      return inputDate.format('MMM D');
     }
   }
 }

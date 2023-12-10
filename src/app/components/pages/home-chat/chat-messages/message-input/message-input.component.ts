@@ -13,6 +13,7 @@ export class MessageInputComponent {
   @Output() onMessageSend = new EventEmitter<number>();
   selectedImage: string | ArrayBuffer | null = null;
   file: File | null = null;
+  isSent: boolean = true;
 
   constructor(
     private messageService: MessageService,
@@ -20,7 +21,7 @@ export class MessageInputComponent {
   ) {}
 
   fileSelected(event: any) {
-    if (event.target.files && event.target.files[0]) {
+    if (event.target.files && event.target.files[0] && event.target.files[0].size < 1024 * 1024 * 15) {
       const file = event.target.files[0];
 
       const reader = new FileReader();
@@ -51,7 +52,7 @@ export class MessageInputComponent {
   }
 
   onSubmit() {
-    if(this.input.trim().length > 0 || this.file) {
+    if((this.input.trim().length > 0 || this.file) && this.isSent) {
       let formData = new FormData()
       // @ts-ignore
       formData.append('file', this.file)
@@ -60,18 +61,16 @@ export class MessageInputComponent {
       // @ts-ignore
       formData.append('content', this.input.trim())
 
+      this.isSent = false;
+
       this.messageService.send(formData).subscribe(resp=>{
-        this.chatService.sendMessage(this.chatId, resp.id).then(resp => {
-          console.log("Sent to real time");
-        })
+        this.chatService.sendMessage(this.chatId, resp.id).then()
         this.onMessageSend.emit(resp.id);
         this.input = '';
         this.file = null;
         this.selectedImage = null;
+        this.isSent = true;
       })
     }
-
   }
-
-
 }
